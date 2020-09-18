@@ -1,19 +1,20 @@
 import React from 'react';
-import Movie from './Movie';
 
-const MovieList =(props) => {
+const MovieList =({movies}) => {
     
     return(
         <div>
             {
-                  props.movies.map((user, i) => {
+                  movies.map((user, i) => {
                     return (
-                    <Movie
-                    key={i}
-                    id={props.movies.id} 
-                    name={props.movies.title} 
-                    email={props.movies.overview}
-                    />
+                        <div className='tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>
+                        <img></img>
+                            <div>
+                                <h2>{user.title}</h2>
+                                <p>{user.overview}</p>
+                                <p>{user.popularity}</p>
+                            </div>
+                        </div>
                     );
                 }) 
             }

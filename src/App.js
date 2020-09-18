@@ -20,7 +20,7 @@ class App extends React.Component{
             return response.json();
         })
         .then(users=> {
-            this.setState({movies : users})
+            this.setState({movies : users.results})
             console.log(this.state.movies);
         })
     }
@@ -32,9 +32,9 @@ class App extends React.Component{
     }
     render () {
         const filteredMovies= this.state.movies.filter(movie => {
-          console.log(filteredMovies);
             return movie.title.toLowerCase().includes(this.state.searchfieald.toLowerCase())
         });
+        console.log(filteredMovies);
         return (
             <div class ='tc'>
                 <h1 className ='f1'>RoboFriends</h1>
