@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
+import MovieList from './component/MovieList';
+import SearchBox from './component/SearchBox';
+// import Scroll from './Scroll';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component{
+    constructor () {
+        super()
+        this.state = {
+            movies : [],
+            searchfieald :''
+        }
+    }
+
+    componentDidMount() {
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=eb2da9f4865b11165c5751549731b90a&language=en-US&page=1')
+        .then(response=> {
+            return response.json();
+        })
+        .then(users=> {
+            this.setState({movies : users})
+            console.log(this.state.movies);
+        })
+    }
+
+    onSearchChange = (event) => {
+        this.setState({searchfieald : event.target.value})
+        
+       
+    }
+    render () {
+        const filteredMovies= this.state.movies.filter(movie => {
+          console.log(filteredMovies);
+            return movie.title.toLowerCase().includes(this.state.searchfieald.toLowerCase())
+        });
+        return (
+            <div class ='tc'>
+                <h1 className ='f1'>RoboFriends</h1>
+                <SearchBox searchChange={this.onSearchChange} />
+                
+                <MovieList movies={filteredMovies} />
+                
+            </div>
+        );
+    }
 }
 
 export default App;
