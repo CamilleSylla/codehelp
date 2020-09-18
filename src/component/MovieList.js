@@ -12,7 +12,6 @@ const MovieList =({movies}) => {
                             <div>
                                 <h2>{user.title}</h2>
                                 <p>{user.overview}</p>
-                                <p>{user.popularity}</p>
                             </div>
                         </div>
                     );
